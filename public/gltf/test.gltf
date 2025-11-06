@@ -31,28 +31,20 @@
 	],
 	"materials":[
 		{
-			"emissiveFactor":[
-				1,
-				1,
-				1
-			],
-			"emissiveTexture":{
-				"index":0
-			},
-			"name":"baked",
+			"name":"baked.002",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":1
+					"index":0
 				},
 				"metallicRoughnessTexture":{
-					"index":2
+					"index":1
 				}
 			}
 		}
 	],
 	"meshes":[
 		{
-			"name":"Cube.060",
+			"name":"Cube.003",
 			"primitives":[
 				{
 					"attributes":{
@@ -67,14 +59,6 @@
 		}
 	],
 	"textures":[
-		{
-			"extensions":{
-				"EXT_texture_webp":{
-					"source":0
-				}
-			},
-			"sampler":0
-		},
 		{
 			"extensions":{
 				"EXT_texture_webp":{
@@ -108,7 +92,7 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":62528,
+			"count":25859,
 			"max":[
 				1.68313729763031,
 				2.514625310897827,
@@ -124,13 +108,13 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":62528,
+			"count":25859,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":62528,
+			"count":25859,
 			"type":"VEC2"
 		},
 		{
@@ -143,26 +127,26 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":750336,
+			"byteLength":310308,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":500224,
-			"byteOffset":750336,
+			"byteLength":206872,
+			"byteOffset":310308,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":500224,
-			"byteOffset":1250560,
+			"byteLength":206872,
+			"byteOffset":517180,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":188688,
-			"byteOffset":1750784,
+			"byteOffset":724052,
 			"target":34963
 		}
 	],
@@ -174,7 +158,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":1939472,
+			"byteLength":912740,
 			"uri":"test.bin"
 		}
 	]
