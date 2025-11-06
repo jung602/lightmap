@@ -2,12 +2,16 @@ import * as THREE from 'three'
 import React from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 
-export function Model(props: React.JSX.IntrinsicElements['group']) {
+type ModelProps = React.JSX.IntrinsicElements['group'] & {
+  emissiveIntensity?: number
+}
+
+export function Model({ emissiveIntensity = 0, ...props }: ModelProps) {
   const { scene } = useGLTF('/gltf/test.gltf')
-  const lightMap = useTexture('/gltf/texture/lightmap.webp')
+  const lightMap = useTexture('/gltf/texture/lightmap2.webp')
   
   lightMap.flipY = false
-  lightMap.colorSpace = THREE.LinearSRGBColorSpace
+  lightMap.colorSpace = THREE.NoColorSpace // Non-color data (lightmap)
   lightMap.channel = 1 // TEXCOORD_1 (uv2) 사용
 
   scene.traverse((o) => {
@@ -25,8 +29,8 @@ export function Model(props: React.JSX.IntrinsicElements['group']) {
         if ((mat as any).isMeshStandardMaterial) {
           const m = mat as THREE.MeshStandardMaterial
           m.lightMap = lightMap
-          m.lightMapIntensity = 0.0
-          // emissiveMap은 gltf에서 자동으로 로드됨 (retopoBed_Baked.webp)
+          m.lightMapIntensity = 10.0
+          m.emissiveIntensity = emissiveIntensity // emissive 강도 조절 (기본값: 1)
         }
       }
       
@@ -38,4 +42,4 @@ export function Model(props: React.JSX.IntrinsicElements['group']) {
 }
 
 useGLTF.preload('/gltf/test.gltf')
-useTexture.preload('/gltf/texture/lightmap.webp')
+useTexture.preload('/gltf/texture/lightmap2.webp')

@@ -21,7 +21,12 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"retopo"
+			"name":"retopo",
+			"translation":[
+				0.06686270236968994,
+				-0.014625309966504574,
+				-0.008322954177856445
+			]
 		}
 	],
 	"materials":[
@@ -32,25 +37,22 @@
 				1
 			],
 			"emissiveTexture":{
-				"index":0,
-				"texCoord":0
+				"index":0
 			},
-			"name":"baked.002",
+			"name":"baked",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":1,
-					"texCoord":0
+					"index":1
 				},
 				"metallicRoughnessTexture":{
-					"index":2,
-					"texCoord":0
+					"index":2
 				}
 			}
 		}
 	],
 	"meshes":[
 		{
-			"name":"Cube.055",
+			"name":"Cube.060",
 			"primitives":[
 				{
 					"attributes":{
@@ -106,61 +108,61 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":59764,
+			"count":62528,
 			"max":[
-				1.75,
-				2.5,
-				1.70403254032135
+				1.68313729763031,
+				2.514625310897827,
+				1.7123554944992065
 			],
 			"min":[
-				-1.75,
-				-4.359986633062363e-05,
-				-1.5118074417114258
+				-1.81686270236969,
+				0.01458171010017395,
+				-1.5034844875335693
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":59764,
+			"count":62528,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":59764,
+			"count":62528,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":89922,
+			"count":94344,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":717168,
+			"byteLength":750336,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":478112,
-			"byteOffset":717168,
+			"byteLength":500224,
+			"byteOffset":750336,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":478112,
-			"byteOffset":1195280,
+			"byteLength":500224,
+			"byteOffset":1250560,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":179844,
-			"byteOffset":1673392,
+			"byteLength":188688,
+			"byteOffset":1750784,
 			"target":34963
 		}
 	],
@@ -172,7 +174,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":1853236,
+			"byteLength":1939472,
 			"uri":"test.bin"
 		}
 	]
