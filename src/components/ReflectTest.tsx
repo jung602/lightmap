@@ -9,9 +9,10 @@ type ReflectTestProps = {
 }
 
 export function ReflectTest({ floorOpacity: floorOpacityProp = 0 }: ReflectTestProps) {
-  const { scene: floorScene } = useGLTF('/gltf/texture/floormesh.glb')
+  const basePath = process.env.NODE_ENV === 'production' ? '/lightmap' : ''
+  const { scene: floorScene } = useGLTF(`${basePath}/gltf/texture/floormesh.glb`)
   const { reflectionIntensity } = useControls('Reflection', {
-    reflectionIntensity: { value: 0.75, min: 0, max: 1, step: 0.01, label: 'Intensity' },
+    reflectionIntensity: { value: 0.5, min: 0, max: 1, step: 0.01, label: 'Intensity' },
   })
   
   // reflector 생성
@@ -62,5 +63,6 @@ export function ReflectTest({ floorOpacity: floorOpacityProp = 0 }: ReflectTestP
   )
 }
 
-useGLTF.preload('/gltf/texture/floormesh.glb')
+const basePath = process.env.NODE_ENV === 'production' ? '/lightmap' : ''
+useGLTF.preload(`${basePath}/gltf/texture/floormesh.glb`)
 

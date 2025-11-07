@@ -18,7 +18,7 @@ export default function Scene() {
   // nightMix에 따라 선형 보간 (lerp)
   const envIntensity = useMemo(() => {
     // nightMix 0 → 0.75, nightMix 1 → 0.25
-    return 0.75 - (uNightMix * 0.5)
+    return 1 - (uNightMix * 0.75)
   }, [uNightMix])
   
   const floorOpacity = useMemo(() => {

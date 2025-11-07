@@ -8,12 +8,13 @@ type ModelProps = React.JSX.IntrinsicElements['group'] & {
 }
 
 export function Model({ nightMix, ...props }: ModelProps) {
-  const { scene } = useGLTF('/gltf/test.gltf')
+  const basePath = process.env.NODE_ENV === 'production' ? '/lightmap' : ''
+  const { scene } = useGLTF(`${basePath}/gltf/test.gltf`)
   
   // 2개의 Baked 텍스처 로드 (Day & Night)
   const [bakedTexture1, bakedTexture2] = useTexture([
-    '/gltf/texture/retopoBed_Baked.webp',
-    '/gltf/texture/retopoBed_Baked2.webp'
+    `${basePath}/gltf/texture/retopoBed_Baked.webp`,
+    `${basePath}/gltf/texture/retopoBed_Baked2.webp`
   ])
   
   // 텍스처 설정
@@ -85,6 +86,7 @@ export function Model({ nightMix, ...props }: ModelProps) {
   return <primitive object={scene} {...props} />
 }
 
-useGLTF.preload('/gltf/test.gltf')
-useTexture.preload('/gltf/texture/retopoBed_Baked.webp')
-useTexture.preload('/gltf/texture/retopoBed_Baked2.webp')
+const basePath = process.env.NODE_ENV === 'production' ? '/lightmap' : ''
+useGLTF.preload(`${basePath}/gltf/test.gltf`)
+useTexture.preload(`${basePath}/gltf/texture/retopoBed_Baked.webp`)
+useTexture.preload(`${basePath}/gltf/texture/retopoBed_Baked2.webp`)
