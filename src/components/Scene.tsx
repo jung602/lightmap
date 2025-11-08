@@ -1,13 +1,44 @@
 "use client";
 
-import { Suspense, useMemo } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useMemo, useEffect } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import { Model } from "./Model";
 import { ReflectTest } from "./ReflectTest";
 import { Reflector } from "./Reflector";
 import * as THREE from "three/webgpu";
 import { useControls } from "leva";
+
+// 카메라 전환을 위한 컴포넌트
+function CameraController({ isPerspective }: { isPerspective: boolean }) {
+  const { camera, gl, set } = useThree();
+  
+  useEffect(() => {
+    if (isPerspective) {
+      // Perspective 카메라로 전환
+      const perspectiveCamera = new THREE.PerspectiveCamera(30, gl.domElement.width / gl.domElement.height, 0.01, 1000);
+      perspectiveCamera.position.set(5, 5, -5);
+      set({ camera: perspectiveCamera });
+    } else {
+      // Orthographic 카메라로 전환
+      const aspect = gl.domElement.width / gl.domElement.height;
+      const frustumSize = 150;
+      const orthographicCamera = new THREE.OrthographicCamera(
+        -frustumSize * aspect / 2,
+        frustumSize * aspect / 2,
+        frustumSize / 2,
+        -frustumSize / 2,
+        0.01,
+        1000
+      );
+      orthographicCamera.position.set(10, 10, -10);
+      orthographicCamera.zoom = 25;
+      set({ camera: orthographicCamera });
+    }
+  }, [isPerspective, gl, set]);
+  
+  return null;
+}
 
 export default function Scene() {
   // 통합 컨트롤: nightMix 값으로 다른 값들 자동 계산
@@ -55,8 +86,7 @@ export default function Scene() {
   return (
     <div className="w-screen h-screen">
       <Canvas 
-        key={isPerspective ? 'perspective' : 'orthographic'}
-        orthographic={cameraConfig.orthographic}
+        orthographic={!isPerspective}
         camera={cameraConfig.camera as any}
         gl={async (canvasProps) => {
           const renderer = new THREE.WebGPURenderer({
@@ -69,7 +99,8 @@ export default function Scene() {
           return renderer;
         }}
       >
-
+        <CameraController isPerspective={isPerspective} />
+        
         <color attach="background" args={["#111"]} />
         <Environment preset="city" environmentIntensity={envIntensity} />
         <Suspense fallback={null}>
