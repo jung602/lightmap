@@ -11,8 +11,9 @@ import { useControls } from "leva";
 
 export default function Scene() {
   // 통합 컨트롤: nightMix 값으로 다른 값들 자동 계산
-  const { uNightMix } = useControls('Scene Settings', {
-    uNightMix: { value: 0, min: 0, max: 1, step: 0.01, label: 'Night Mix' }
+  const { uNightMix, isPerspective } = useControls('Scene Settings', {
+    uNightMix: { value: 0, min: 0, max: 1, step: 0.01, label: 'Night Mix' },
+    isPerspective: { value: false, label: 'Perspective Camera' }
   })
   
   // nightMix에 따라 선형 보간 (lerp)
@@ -26,16 +27,37 @@ export default function Scene() {
     return 0.05 + (uNightMix * 0.1)
   }, [uNightMix])
 
-  return (
-    <div className="w-screen h-screen">
-      <Canvas 
-        orthographic
-        camera={{ 
-          position: [10,10,-10], 
+  // 카메라 설정
+  const cameraConfig = useMemo(() => {
+    if (isPerspective) {
+      return {
+        orthographic: false,
+        camera: {
+          position: [5, 5, -5],
+          fov: 45,
+          near: 0.01,
+          far: 1000
+        }
+      }
+    } else {
+      return {
+        orthographic: true,
+        camera: {
+          position: [10, 10, -10],
           zoom: 150,
           near: 0.01,
           far: 1000
-        }}
+        }
+      }
+    }
+  }, [isPerspective])
+
+  return (
+    <div className="w-screen h-screen">
+      <Canvas 
+        key={isPerspective ? 'perspective' : 'orthographic'}
+        orthographic={cameraConfig.orthographic}
+        camera={cameraConfig.camera as any}
         gl={async (canvasProps) => {
           const renderer = new THREE.WebGPURenderer({
             canvas: canvasProps.canvas as HTMLCanvasElement,

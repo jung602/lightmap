@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
-  basePath: "/lightmap",
-  assetPrefix: "/lightmap",
+  // 프로덕션 빌드일 때만 basePath 적용
+  ...(isProd && {
+    basePath: "/lightmap",
+    assetPrefix: "/lightmap",
+  }),
   output: "export",
   images: {
     unoptimized: true,
