@@ -109,7 +109,7 @@ export default function Scene() {
           <Reflector />
         </Suspense>
 
-        <OrbitControls enableDamping makeDefault target={[0, 1.5, 0]} />
+        <OrbitControls autoRotate={true} autoRotateSpeed={0.1} enableDamping makeDefault target={[0, 1.5, 0]} />
 
       </Canvas>
     </div>
